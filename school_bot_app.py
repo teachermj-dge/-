@@ -214,7 +214,7 @@ if st.button("✨ 생기부 문구 일괄 생성하기", type="primary", use_con
                             cleaned_text = response.text.replace("\n", " ").replace("/", " 및 ").replace("  ", " ").strip()
                             st.text_area(f"학생 {s_data['id']} 결과물", value=cleaned_text, height=150, key=f"res_{s_data['id']}_{retries}")
                         success = True
-                        if s_data["id"] != num_students: time.sleep(5)
+                        if s_data["id"] != num_students: time.sleep(15)
                     except Exception as e:
                         retries += 1
                         if retries < 3:
