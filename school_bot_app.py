@@ -20,7 +20,7 @@ if 'user_email' not in st.session_state:
 # ==========================================
 # 2. 사용자 인증 및 화이트리스트
 # ==========================================
-ALLOWED_EMAILS = ["teacher1@school.ms.kr", "science_teacher@gmail.com", "admin@school.ms.kr"]
+ALLOWED_EMAILS = ["akswls1203@gmail.com", "science_teacher@gmail.com", "admin@school.ms.kr"]
 
 def simulate_login(email):
     if email in ALLOWED_EMAILS:
