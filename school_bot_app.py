@@ -1,6 +1,7 @@
 import streamlit as st
 import time
 from PIL import Image
+import PyPDF2
 
 try:
     from google import genai
@@ -133,7 +134,7 @@ for i, tab in enumerate(tabs):
                 achievement_level = st.selectbox("성취수준", ["선택 안 함", "상", "중", "하"], key=f"level_{i}")
                 if achievement_level == "선택 안 함": achievement_level = None
                 
-            uploaded_file = st.file_uploader(f"보고서 이미지 업로드 (선택)", type=["jpg", "jpeg", "png", "pdf"], key=f"file_{i}")
+            uploaded_file = st.file_uploader(f"보고서 업로드 (선택)", type=["jpg", "jpeg", "png", "pdf"], key=f"file_{i}")
             img_obj = None
             if uploaded_file is not None:
                 try:
@@ -205,7 +206,7 @@ if st.button("✨ 생기부 문구 일괄 생성하기", type="primary", use_con
                             selected_record_type, s_data["career"], s_data["trait"], s_data["level"],
                             activity_name, activity_date_str, target_bytes, (s_data["img"] is not None)
                         )
-                        contents = [s_data["img"], final_prompt] if s_data["img"] else final_prompt
+                        contents = [s_data["file_content"], final_prompt] if s_data["file_content"] else final_prompt
                         response = client.models.generate_content(model='gemini-2.5-flash', contents=contents)
                         
                         with results_container:
