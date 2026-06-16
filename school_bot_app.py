@@ -135,14 +135,25 @@ for i, tab in enumerate(tabs):
                 if achievement_level == "선택 안 함": achievement_level = None
                 
             uploaded_file = st.file_uploader(f"보고서 업로드 (선택)", type=["jpg", "jpeg", "png", "pdf"], key=f"file_{i}")
-            img_obj = None
-            if uploaded_file is not None:
+# 기존 img_obj = ~ 어쩌구 부분을 지우고 이 내용을 넣으세요
+        file_content = None 
+        if uploaded_file is not None:
+            if uploaded_file.type == "application/pdf":
                 try:
-                    img_obj = Image.open(uploaded_file)
-                    st.success("이미지 로드 완료")
+                    pdf_reader = PyPDF2.PdfReader(uploaded_file)
+                    pdf_text = ""
+                    for page in pdf_reader.pages:
+                        pdf_text += page.extract_text() or ""
+                    file_content = pdf_text
+                    st.info("📄 PDF 텍스트 추출 완료")
                 except Exception:
-                    st.error("이미지 로드 오류")
-        
+                    pass # 오류 발생 시 아무것도 안 함
+            else:
+                try:
+                    file_content = Image.open(uploaded_file)
+                    st.success("📷 이미지 로드 완료")
+                except Exception:
+                    st.warning("이미지 형식을 불러올 수 없습니다.")        
         students_data.append({
             "id": i + 1,
             "career": career_path,
