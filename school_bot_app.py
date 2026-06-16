@@ -16,7 +16,7 @@ if 'user_email' not in st.session_state:
     st.session_state.user_email = ""
 
 # 2. 사용자 인증 (간소화 버전)
-ALLOWED_EMAILS = ["teacher1@school.ms.kr", "science_teacher@gmail.com", "admin@school.ms.kr"]
+ALLOWED_EMAILS = ["akswls1203@gmail.com", "science_teacher@gmail.com", "admin@school.ms.kr"]
 
 def simulate_login(email):
     if email in ALLOWED_EMAILS:
