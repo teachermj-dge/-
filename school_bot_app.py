@@ -218,7 +218,7 @@ if st.button("✨ 생기부 문구 일괄 생성하기", type="primary", use_con
                         else: # 데이터 없음
                             contents_for_api = build_prompt(selected_record_type, s_data["career"], s_data["trait"], s_data["level"], activity_name, activity_date_str, target_bytes, content_type)
                         
-                        response = client.models.generate_content(model='gemini-1.5-flash-002', contents=contents_for_api)
+                        response = client.models.generate_content(model='gemini-2.0-flash', contents=contents_for_api)
                         
                         with results_container:
                             st.success(f"✅ 학생 {s_data['id']} 생성 완료!")
@@ -226,10 +226,10 @@ if st.button("✨ 생기부 문구 일괄 생성하기", type="primary", use_con
                             st.text_area(f"학생 {s_data['id']} 결과물", value=cleaned_text, height=150, key=f"res_{s_data['id']}_{retries}")
                         success = True
                         if s_data["id"] != num_students: time.sleep(15) # 필수 대기
-                    except Exception as e:
+except Exception as e:
                         retries += 1
                         if retries < 3:
-                            with results_container: st.warning(f"⏳ 구글 서버 지연: 15초 대기 후 재시도 중... ({retries}/3)")
-                            time.sleep(15)
+                            with results_container: st.warning(f"⏳ 구글 서버 지연: 대기시간: 약 60초... ({retries}/3)")
+                            time.sleep(60)
                         else:
                             with results_container: st.error(f"❌ 학생 {s_data['id']} 생성 실패: {e}")
