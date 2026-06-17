@@ -218,7 +218,7 @@ if st.button("✨ 생기부 문구 일괄 생성하기", type="primary", use_con
                         else: # 데이터 없음
                             contents_for_api = build_prompt(selected_record_type, s_data["career"], s_data["trait"], s_data["level"], activity_name, activity_date_str, target_bytes, content_type)
                         
-                        response = client.models.generate_content(model='gemini-1.5-flash', contents=contents_for_api)
+                        response = client.models.generate_content(model='gemini-1.5-flash-002', contents=contents_for_api)
                         
                         with results_container:
                             st.success(f"✅ 학생 {s_data['id']} 생성 완료!")
