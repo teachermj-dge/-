@@ -226,7 +226,7 @@ if st.button("✨ 생기부 문구 일괄 생성하기", type="primary", use_con
                             st.text_area(f"학생 {s_data['id']} 결과물", value=cleaned_text, height=150, key=f"res_{s_data['id']}_{retries}")
                         success = True
                         if s_data["id"] != num_students: time.sleep(15) # 필수 대기
-except Exception as e:
+                    except Exception as e:
                         retries += 1
                         if retries < 3:
                             with results_container: st.warning(f"⏳ 구글 서버 지연: 대기시간: 약 60초... ({retries}/3)")
